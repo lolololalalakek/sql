@@ -15,5 +15,6 @@ VALUES
     ('Eminem', 'Eminemovich', '03.04.2005', 'eminem@Gmail.com', 182102),
     ('Slim', 'Shadiev', '04.01.2001', 'slimshady@mail.ru', 182104),
     ('Eminem', 'Eminemovich', '03.04.2005', 'eminem@Gmail.com', 182102),
-    ('Kendrick', 'Lamarov', '15.02.2001', 'Lamarov@mail.ru', 182104);
+    ('Kendrick', 'Lamarov', '15.02.2001', 'Lamarov@mail.ru', 182104),
+    ('Eminem', 'Eminemovich', '03.04.2005', 'eminem@Gmail.com', 182102);
 
