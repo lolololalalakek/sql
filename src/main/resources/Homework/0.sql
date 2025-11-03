@@ -1,0 +1,101 @@
+--SQL. Lesson 04
+--Таблицы для ДЗ
+--
+--CREATE TABLE departments (
+-- id     SERIAL PRIMARY KEY,
+-- name   VARCHAR(50) NOT NULL,
+-- location VARCHAR(50)
+--);
+--
+--CREATE TABLE employees (
+-- id           SERIAL PRIMARY KEY,
+-- name         VARCHAR(50) NOT NULL,
+-- position     VARCHAR(50),
+-- salary       NUMERIC(10,2),
+-- department_id INTEGER REFERENCES departments(id) ON DELETE SET NULL,
+-- manager_id   INTEGER REFERENCES employees(id) ON DELETE SET NULL
+--);
+--
+--CREATE TABLE customers (
+-- id   SERIAL PRIMARY KEY,
+-- name VARCHAR(100) NOT NULL,
+-- city VARCHAR(50)
+--);
+--
+--CREATE TABLE orders (
+-- id          SERIAL PRIMARY KEY,
+-- order_date  DATE NOT NULL,
+-- amount      NUMERIC(10,2),
+-- employee_id INTEGER REFERENCES employees(id) ON DELETE SET NULL,
+-- customer_id INTEGER REFERENCES customers(id) ON DELETE SET NULL
+--);
+--
+--CREATE TABLE products (
+-- id    SERIAL PRIMARY KEY,
+-- name  VARCHAR(100) NOT NULL,
+-- price NUMERIC(10,2)
+--);
+--
+--CREATE TABLE order_items (
+-- id         SERIAL PRIMARY KEY,
+-- order_id   INTEGER REFERENCES orders(id) ON DELETE CASCADE,
+-- product_id INTEGER REFERENCES products(id) ON DELETE SET NULL,
+-- quantity   INTEGER NOT NULL
+--);
+--
+--
+--INSERT INTO departments (name, location)
+--VALUES
+--('Sales', 'New York'),
+--('IT', 'Boston'),
+--('HR', 'Dallas'),
+--('Finance', 'New York'),
+--('Marketing', 'Boston');
+--
+---- вставляем менеджеров и ключевых сотрудников
+--INSERT INTO employees (id, name, position, salary, department_id, manager_id)
+--VALUES
+--(100, 'John Smith', 'CEO', 150000.00, NULL, NULL), -- CEO без отдела и менеджера
+--(101, 'Jane Doe', 'Sales Manager', 90000.00, 1, 100),
+--(102, 'Peter Jones', 'IT Manager', 95000.00, 2, 100);
+--
+----подчинённые, ссылаясь на их менеджеров
+--INSERT INTO employees (name, position, salary, department_id, manager_id)
+--VALUES
+--('Alice Brown', 'Sales Representative', 60000.00, 1, 101),
+--('Bob Green', 'Sales Representative', 62000.00, 1, 101),
+--('Charlie Day', 'Software Developer', 75000.00, 2, 102),
+--('Dana Evans', 'HR Specialist', 55000.00, 3, 100),
+--('Eve Clark', 'Finance Analyst', 70000.00, 4, 100),
+--('Frank White', 'Marketing Coord.', 50000.00, 5, 100),
+--('Grace Hall', 'HR Assistant', NULL, 3, 100), -- Зарплата NULL для проверки Задания 20
+--('Heidi King', 'Trainee', 40000.00, NULL, 101); -- Сотрудник без отдела для проверки Задания 1
+--
+--INSERT INTO customers (name, city)
+--VALUES
+--('Client A', 'New York'),
+--('Client B', 'Boston'),
+--('Client C', 'Chicago'),
+--('Client D', 'Dallas'),
+--('Client E', 'Los Angeles');
+--
+--INSERT INTO products (name, price)
+--VALUES
+--('Laptop', 1200.00),
+--('Monitor', 300.00),
+--('Keyboard', 75.00),
+--('Mouse', 25.00),
+--('Server', 5000.00),
+--('Software License', 150.00); -- Продукт, который не будет продан для Задания 8
+--
+--
+--INSERT INTO order_items (order_id, product_id, quantity)
+--VALUES
+--(1, 1, 2), -- Заказ 1: 2 x Laptop
+--(1, 2, 1), -- Заказ 1: 1 x Monitor
+--(2, 6, 1), -- Заказ 2: 1 x Software License
+--(3, 2, 1), -- Заказ 3: 1 x Monitor
+--(3, 3, 2), -- Заказ 3: 2 x Keyboard
+--(4, 1, 1), -- Заказ 4: 1 x Laptop
+--(4, 4, 4); -- Заказ 4: 4 x Mouse
+---- Заказ 5 и Заказ 6 остаются без позиций для проверки заданий 5, 8
